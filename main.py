@@ -12,7 +12,7 @@ A tool for cleaning and validation:
 - Saves intermediate files at each processing step
 
 Usage:
-python main.py --input data.csv --output-dir results
+python main.py --input subset.csv --output-dir results
 """
 
 import argparse

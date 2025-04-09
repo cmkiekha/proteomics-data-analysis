@@ -8,7 +8,10 @@ import numpy as np
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("proteomics_cleaner.log"), logging.StreamHandler()],
+    handlers=[
+        logging.FileHandler("proteomics_cleaner.log"),
+        logging.StreamHandler(),
+    ],
 )
 logger = logging.getLogger(__name__)
 
@@ -30,7 +33,7 @@ class ProteomicsCleaner:
         sheet_name=0,
         column_af_index: int = 31,  # Index for column AF
         patient_start_index: int = 47,  # Index for column AV
-        quality_threshold: float = 0.5,  # Missing value threshold
+        quality_threshold: float = 0.25,  # Missing value threshold
     ):
         """
         # Initialize the cleaner with file paths and parameters
@@ -92,11 +95,7 @@ class ProteomicsCleaner:
             data.to_csv(raw_path, index=False)
 
             logger.info(
-                f"Saved raw data to {raw_path} "
-                f"({data.shape[0]} rows, {data.shape[1]} columns)"
-            )
-            print(
-                f"Step 1: Loaded raw data "
+                f"Step 1: Saved raw data to {raw_path} "
                 f"({data.shape[0]} rows, {data.shape[1]} columns)"
             )
 
@@ -134,19 +133,17 @@ class ProteomicsCleaner:
 
         self.af_proteins = protein_labels
 
-        logger.info(f"Extracted {len(protein_labels)} protein labels from column AF")
-        print(f"Step 2: Extracted {len(protein_labels)} protein labels from column AF")
-
+        logger.info(f"Step 2: Extracted {len(protein_labels)} protein labels from column AF")
         return protein_labels
 
     def extract_fused_protein_ids(self) -> Dict:
         """
-        # Extract fused protein IDs by combining columns B and X (rows 20+)
-
+        # Extract protein IDs directly from column X (rows 20+)
+        
         Returns:
-            Dictionary mapping row indices to fused protein information
+            Dictionary mapping row indices to protein information
         """
-        logger.info("Extracting fused protein IDs from columns B and X (rows 20+)")
+        logger.info("Extracting protein IDs from column X (rows 20+)")
 
         if self.raw_data is None:
             raise ValueError("No data loaded. Call load_data() first.")
@@ -154,25 +151,21 @@ class ProteomicsCleaner:
         # Process rows starting from row 20 (0-indexed as 19)
         fused_proteins = {}
         for row in range(19, self.raw_data.shape[0]):
-            protein_accession = self.raw_data.iloc[row, 1]  # Column B
-            modified_sequence = self.raw_data.iloc[row, 23]  # Column X
+            # Get only the protein identifier from column X (index 23)
+            protein_id = self.raw_data.iloc[row, 23]  # Column X
 
-            if not pd.isna(protein_accession) and not pd.isna(modified_sequence):
-                fused_id = f"{protein_accession}_{modified_sequence}"
+            if not pd.isna(protein_id):
+                # Use this identifier directly
                 fused_proteins[row] = {
                     "row_index": row,
-                    "protein_accession": protein_accession,
-                    "modified_sequence": modified_sequence,
-                    "fused_id": fused_id,
+                    "fused_id": str(protein_id),  # Ensure it's a string
                 }
 
-        # Save fused protein IDs with useful metadata
+        # Save protein IDs with useful metadata
         fused_protein_info = [
             {
                 "RowIndex": row + 1,  # 1-indexed for user-friendly viewing
-                "ProteinAccession": info["protein_accession"],
-                "ModifiedSequence": info["modified_sequence"],
-                "FusedID": info["fused_id"],
+                "ProteinID": info["fused_id"],
             }
             for row, info in fused_proteins.items()
         ]
@@ -183,9 +176,7 @@ class ProteomicsCleaner:
 
         self.fused_proteins = fused_proteins
 
-        logger.info(f"Extracted {len(fused_proteins)} fused protein IDs")
-        print(f"Step 3: Extracted {len(fused_proteins)} fused protein IDs")
-
+        logger.info(f"Step 3: Extracted {len(fused_proteins)} protein IDs")
         return fused_proteins
 
     def identify_patient_columns(self) -> Dict:
@@ -244,43 +235,32 @@ class ProteomicsCleaner:
         )
 
         logger.info(
-            f"Identified {len(patient_columns)} patient columns "
-            f"({unique_patients} unique patients, {unique_timepoints} unique timepoints)"
-        )
-        print(
             f"Step 4: Identified {len(patient_columns)} patient columns "
             f"({unique_patients} unique patients, {unique_timepoints} unique timepoints)"
         )
-
         return patient_columns
 
     def extract_protein_values(self) -> Dict:
         """
         # Extract protein values for all proteins and all patients
-
         Process:
         1. Extract values for Column AF proteins (rows 4-14)
         2. Extract values for Fused proteins (rows 20+)
-
         Returns:
             Dictionary with patient data and protein values
         """
         logger.info("Extracting protein values for all proteins")
-
         # Check prerequisites
         self._check_prerequisites(
             raw_data=True, af_proteins=True, fused_proteins=True, patient_columns=True
         )
-
         # Create a dictionary to store patient data
         patient_data = {}
-
         # Process each patient column
         for col_idx, patient_info in self.patient_columns.items():
             patient_id = patient_info["patient_id"]
             timepoint = patient_info["timepoint"]
             key = f"{patient_id}_{timepoint}"
-
             # Initialize patient entry if not exists
             if key not in patient_data:
                 patient_data[key] = {
@@ -288,7 +268,6 @@ class ProteomicsCleaner:
                     "timepoint": timepoint,
                     "values": {},
                 }
-
             # 1. Extract values for AF proteins (rows 4-14)
             for protein_idx, protein_label in enumerate(self.af_proteins):
                 row_idx = protein_idx + 3  # rows 4-14 (0-indexed as 3-13)
@@ -299,7 +278,6 @@ class ProteomicsCleaner:
                     value = self.raw_data.iloc[row_idx, col_idx]
                     if not pd.isna(value):
                         patient_data[key]["values"][protein_label] = value
-
             # 2. Extract values for fused proteins (rows 20+)
             for row_idx, protein_info in self.fused_proteins.items():
                 fused_id = protein_info["fused_id"]
@@ -310,29 +288,21 @@ class ProteomicsCleaner:
                     value = self.raw_data.iloc[row_idx, col_idx]
                     if not pd.isna(value):
                         patient_data[key]["values"][fused_id] = value
-
+        
         # Save a sample of protein values for validation
         self._save_protein_values_sample(patient_data)
 
         # Calculate and save protein coverage statistics
         self._calculate_protein_coverage(patient_data)
-
         self.patient_data = patient_data
-
         all_proteins = set(self.af_proteins).union(
             {info["fused_id"] for info in self.fused_proteins.values()}
         )
         self.all_proteins = list(all_proteins)
-
         logger.info(
-            f"Extracted values for {len(patient_data)} patient-timepoint combinations "
-            f"({len(all_proteins)} proteins)"
-        )
-        print(
             f"Step 5: Extracted values for {len(patient_data)} patient-timepoint combinations "
             f"({len(all_proteins)} proteins)"
         )
-
         return patient_data
 
     def _check_prerequisites(
@@ -524,19 +494,9 @@ class ProteomicsCleaner:
         fused_count = protein_count - af_count
 
         logger.info(
-            f"Created transformed dataset with {transformed_df.shape[0]} rows and {transformed_df.shape[1]} columns"
-        )
-        logger.info(
+            f"Step 6: Created transformed dataset with {transformed_df.shape[0]} rows and {transformed_df.shape[1]} columns. "
             f"Included {protein_count} proteins ({af_count} from AF, {fused_count} fused) "
             f"with greater than or equal to {min_coverage_pct}% coverage"
-        )
-
-        print(
-            f"Step 6: Created transformed dataset with {transformed_df.shape[0]} patients and {protein_count} proteins"
-        )
-        print(
-            f" Included {af_count} proteins from column AF and {fused_count} fused proteins "
-            f"with with greater than or equal to {min_coverage_pct}% coverage"
         )
 
         return transformed_df
@@ -597,27 +557,14 @@ class ProteomicsCleaner:
             "outlier_counts_z": stats["z_outliers"].to_dict(),
         }
 
-        # Log summary
-        logger.info(f"Calculated quality metrics for {len(protein_columns)} proteins")
+        logger.info(f"Step 7: Calculated quality metrics for {len(protein_columns)} proteins")
         logger.info(
             f"Average missingness: {stats['missing_pct'].mean():.2f}%, "
-            f"Proteins with >50% missing: {problematic['high_missing'].sum()}"
-        )
-        logger.info(
+            f"Proteins with >25% missing: {problematic['high_missing'].sum()}, "
+            f"Proteins with high CV (>100%): {problematic['high_cv'].sum()} "
             f"Proteins with IQR outliers: {problematic['high_iqr_outliers'].sum()}, "
-            f"Z-score outliers: {problematic['high_z_outliers'].sum()}"
-        )
-
-        print(f"Step 7: Calculated quality metrics")
-        print(f" Average missingness: {stats['missing_pct'].mean():.2f}%")
-        print(f" Proteins with >50% missing: {problematic['high_missing'].sum()}")
-        print(f" Proteins with high CV (>100%): {problematic['high_cv'].sum()}")
-        print(f" Proteins with IQR outliers: {problematic['high_iqr_outliers'].sum()}")
-        print(
-            f" Proteins with Z-score outliers: {problematic['high_z_outliers'].sum()}"
-        )
-        print(
-            f" Proteins with multiple quality flags: {(problematic['flag_count'] > 1).sum()}"
+            f"Proteins with Z-score outliers: {problematic['high_z_outliers'].sum()}, "
+            f"Proteins with multiple quality flags: {(problematic['flag_count'] > 1).sum()}"
         )
 
         return self.quality_metrics
@@ -645,9 +592,9 @@ class ProteomicsCleaner:
 
         # Flag problematic proteins
         problematic = pd.DataFrame(index=stats.index)
-        problematic["high_missing"] = stats["missing_pct"] > 50
+        problematic["high_missing"] = stats["missing_pct"] > 25
         problematic["high_cv"] = stats["cv"] > 100
-        problematic["high_zeros"] = stats["zero_pct"] > 50
+        problematic["high_zeros"] = stats["zero_pct"] > 25
         problematic["high_negatives"] = stats["negative_pct"] > 5
 
         return stats, problematic
@@ -842,7 +789,6 @@ class ProteomicsCleaner:
         """
         logger.info("Creating protein distribution visualizations")
 
-        # Import visualization libraries
         try:
             import matplotlib.pyplot as plt
             import seaborn as sns
@@ -850,9 +796,6 @@ class ProteomicsCleaner:
         except ImportError:
             logger.error(
                 "Matplotlib and/or Seaborn not installed. Cannot create visualizations."
-            )
-            print(
-                "Error: Matplotlib and/or Seaborn not installed. Cannot create visualizations."
             )
             return None
 
@@ -893,11 +836,7 @@ class ProteomicsCleaner:
             viz_dir, proteins_to_viz, stats, problematic
         )
 
-        logger.info(f"Created visualizations for {len(proteins_to_viz)} proteins")
-        print(
-            f"Step 8: Visualizations created for {len(proteins_to_viz)} proteins. See {viz_dir}/index.html"
-        )
-
+        logger.info(f"Step 8: Created visualizations for {len(proteins_to_viz)} proteins")
         return viz_dir
 
     def _create_overview_plots(self, viz_dir, stats, problematic):
@@ -1237,19 +1176,14 @@ class ProteomicsCleaner:
         # Save validation results
         self._save_validation_results(validation_results)
 
-        # Log summary
         logger.info(
-            f"Validation completed: {'SUCCESS' if overall_success else 'SOME CHECKS FAILED'}"
+            f"Step 9: Validation completed: {'SUCCESS' if overall_success else 'FAILED'}"
         )
-
-        print(f"Step 9: Validation {'PASSED' if overall_success else 'FAILED'}")
-        print(
-            f" Patient preservation: {validation_results['patient_preservation']['success']}"
+        logger.info(
+            f"Patient preservation: {validation_results['patient_preservation']['success']}, "
+            f"Protein representation: {validation_results['protein_preservation']['success']}, "
+            f"Value validation: {validation_results['value_validation']['success']}"
         )
-        print(
-            f" Protein representation: {validation_results['protein_preservation']['success']}"
-        )
-        print(f" Value validation: {validation_results['value_validation']['success']}")
 
         return validation_results
 
@@ -1552,9 +1486,7 @@ class ProteomicsCleaner:
         with open(report_path, "w") as f:
             f.write("\n".join(report_lines))
 
-        logger.info(f"Summary report saved to {report_path}")
-        print(f"Step 10: Generated summary report: {report_path}")
-
+        logger.info(f"Step 10: Summary report saved to {report_path}")
         return report_path
 
     #############################################################################
@@ -1592,54 +1524,43 @@ class ProteomicsCleaner:
 
             # Step 1: Load data
             self.load_data()
-            input("Press Enter to continue to the next step...")
 
             # Step 2: Extract protein labels from column AF
             self.extract_protein_labels()
-            input("Press Enter to continue to the next step...")
 
             # Step 3: Extract fused protein IDs
             self.extract_fused_protein_ids()
-            input("Press Enter to continue to the next step...")
 
             # Step 4: Identify patient columns
             self.identify_patient_columns()
-            input("Press Enter to continue to the next step...")
 
             # Step 5: Extract protein values
             self.extract_protein_values()
-            input("Press Enter to continue to the next step...")
 
             # Step 6: Create transformed dataset
             self.create_transformed_dataset(min_coverage_pct=min_coverage_pct)
-            input("Press Enter to continue to the next step...")
 
             # Step 7: Calculate quality metrics
             self.calculate_quality_metrics()
-            input("Press Enter to continue to the next step...")
 
             # Step 8: Visualize protein distributions
             try:
                 self.visualize_protein_distributions(max_proteins=max_viz_proteins)
-                input("Press Enter to continue to the next step...")
             except Exception as e:
                 logger.warning(f"Visualization failed: {e}. Continuing with pipeline.")
-                print(f"Warning: Visualization failed: {e}")
-                print("Continuing with the pipeline...")
                 traceback.print_exc()
 
             # Step 9: Validate transformation
             self.validate_transformation()
-            input("Press Enter to continue to the next step...")
 
             # Step 10: Generate summary report
             self.generate_summary_report()
 
             print("\n========== Cleaning pipeline completed successfully! ==========")
-            print(
+            logger.info(
                 f"Final transformed dataset saved to: {os.path.join(self.output_dir, '07_transformed_data.csv')}"
             )
-            print(
+            logger.info(
                 f"Summary report saved to: {os.path.join(self.output_dir, '10_cleaning_summary.md')}"
             )
 
@@ -1648,6 +1569,4 @@ class ProteomicsCleaner:
         except Exception as e:
             logger.error(f"Error in cleaning pipeline: {e}")
             logger.error(traceback.format_exc())
-            print(f"\nError: {e}")
-            print("See log file for more details.")
             return False

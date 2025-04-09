@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Protein Distribution Visualizations</title>
+ <style>
+ body { font-family: Arial, sans-serif; margin: 20px; }
+ .protein-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+ .protein-card { border: 1px solid #ddd; padding: 10px; border-radius: 5px; }
+ .protein-card img { max-width: 100%; }
+ .protein-card h3 { margin-top: 0; }
+ .flags { color: red; }
+ .metrics { font-size: 12px; color: #666; margin-bottom: 8px; }
+ </style>
+</head>
+<body>
+ <h1>Protein Distribution Visualizations</h1>
+ <p>Click on any image to view full size.</p>
+ <div class='protein-grid'>
+ <div class='protein-card'>
+ <h3>D-Dimer_H4t6</h3>
+ <div class='source'>Source: AF</div>
+ <div class='flags'>High CV, High Zeros, IQR Outliers</div>
+ <a href='individual_distributions/D-Dimer_H4t6.png' target='_blank'>
+ <img src='individual_distributions/D-Dimer_H4t6.png' alt='D-Dimer_H4t6 distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>D-Dimer_6t12</h3>
+ <div class='source'>Source: AF</div>
+ <div class='flags'>High CV, High Zeros</div>
+ <a href='individual_distributions/D-Dimer_6t12.png' target='_blank'>
+ <img src='individual_distributions/D-Dimer_6t12.png' alt='D-Dimer_6t12 distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_266_CDNd</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_266_CDNd.png' target='_blank'>
+ <img src='individual_distributions/CFAH_266_CDNd.png' alt='CFAH_266_CDNd distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>Fibrinogen_HL</h3>
+ <div class='source'>Source: AF</div>
+ 
+ <a href='individual_distributions/Fibrinogen_HL.png' target='_blank'>
+ <img src='individual_distributions/Fibrinogen_HL.png' alt='Fibrinogen_HL distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C4BPA_381_RPAd</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C4BPA_381_RPAd.png' target='_blank'>
+ <img src='individual_distributions/C4BPA_381_RPAd.png' alt='C4BPA_381_RPAd distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_291_PIE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_291_PIE.png' target='_blank'>
+ <img src='individual_distributions/CO3_291_PIE.png' alt='CO3_291_PIE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_574_DVH</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_574_DVH.png' target='_blank'>
+ <img src='individual_distributions/CFAH_574_DVH.png' alt='CFAH_574_DVH distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C1R_340_GYQ</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C1R_340_GYQ.png' target='_blank'>
+ <img src='individual_distributions/C1R_340_GYQ.png' alt='C1R_340_GYQ distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HPT_78_VGD</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HPT_78_VGD.png' target='_blank'>
+ <img src='individual_distributions/HPT_78_VGD.png' alt='HPT_78_VGD distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_2450_NGE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_2450_NGE.png' target='_blank'>
+ <img src='individual_distributions/APOB_2450_NGE.png' alt='APOB_2450_NGE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_897_SYT</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_897_SYT.png' target='_blank'>
+ <img src='individual_distributions/CFAH_897_SYT.png' alt='CFAH_897_SYT distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HGFA_364_EAC</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HGFA_364_EAC.png' target='_blank'>
+ <img src='individual_distributions/HGFA_364_EAC.png' alt='HGFA_364_EAC distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_783_KEGd</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_783_KEGd.png' target='_blank'>
+ <img src='individual_distributions/CFAH_783_KEGd.png' alt='CFAH_783_KEGd distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOA_8.0194308422537E+105_DAV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOA_8.0194308422537E+105_DAV.png' target='_blank'>
+ <img src='individual_distributions/APOA_8.0194308422537E+105_DAV.png' alt='APOA_8.0194308422537E+105_DAV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HPT_85_CEA</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HPT_85_CEA.png' target='_blank'>
+ <img src='individual_distributions/HPT_85_CEA.png' alt='HPT_85_CEA distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_409_SIN</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_409_SIN.png' target='_blank'>
+ <img src='individual_distributions/CO3_409_SIN.png' alt='CO3_409_SIN distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HEMO_103_GHN</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HEMO_103_GHN.png' target='_blank'>
+ <img src='individual_distributions/HEMO_103_GHN.png' alt='HEMO_103_GHN distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C1R_347_NQV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C1R_347_NQV.png' target='_blank'>
+ <img src='individual_distributions/C1R_347_NQV.png' alt='C1R_347_NQV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>FIBA_309_PGSd</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/FIBA_309_PGSd.png' target='_blank'>
+ <img src='individual_distributions/FIBA_309_PGSd.png' alt='FIBA_309_PGSd distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HPT_83_PEC</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HPT_83_PEC.png' target='_blank'>
+ <img src='individual_distributions/HPT_83_PEC.png' alt='HPT_83_PEC distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CBPB2_172_AIW</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CBPB2_172_AIW.png' target='_blank'>
+ <img src='individual_distributions/CBPB2_172_AIW.png' alt='CBPB2_172_AIW distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C4BPA_79_TCL</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C4BPA_79_TCL.png' target='_blank'>
+ <img src='individual_distributions/C4BPA_79_TCL.png' alt='C4BPA_79_TCL distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>FN_MS</h3>
+ <div class='source'>Source: AF</div>
+ 
+ <a href='individual_distributions/FN_MS.png' target='_blank'>
+ <img src='individual_distributions/FN_MS.png' alt='FN_MS distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_1156_ICEd</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_1156_ICEd.png' target='_blank'>
+ <img src='individual_distributions/CO3_1156_ICEd.png' alt='CO3_1156_ICEd distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>Fibrinogen_24+</h3>
+ <div class='source'>Source: AF</div>
+ <div class='flags'>High Zeros</div>
+ <a href='individual_distributions/Fibrinogen_24+.png' target='_blank'>
+ <img src='individual_distributions/Fibrinogen_24+.png' alt='Fibrinogen_24+ distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_286_GDE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_286_GDE.png' target='_blank'>
+ <img src='individual_distributions/CFAH_286_GDE.png' alt='CFAH_286_GDE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_266_CDN2d</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_266_CDN2d.png' target='_blank'>
+ <img src='individual_distributions/CFAH_266_CDN2d.png' alt='CFAH_266_CDN2d distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>Fibrinogen_F</h3>
+ <div class='source'>Source: AF</div>
+ <div class='flags'>High Zeros</div>
+ <a href='individual_distributions/Fibrinogen_F.png' target='_blank'>
+ <img src='individual_distributions/Fibrinogen_F.png' alt='Fibrinogen_F distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_1968_SAL</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_1968_SAL.png' target='_blank'>
+ <img src='individual_distributions/APOB_1968_SAL.png' alt='APOB_1968_SAL distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_642_VSL</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_642_VSL.png' target='_blank'>
+ <img src='individual_distributions/APOB_642_VSL.png' alt='APOB_642_VSL distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_306_GLA</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_306_GLA.png' target='_blank'>
+ <img src='individual_distributions/APOB_306_GLA.png' alt='APOB_306_GLA distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C4BPA_160_VGW</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C4BPA_160_VGW.png' target='_blank'>
+ <img src='individual_distributions/C4BPA_160_VGW.png' alt='C4BPA_160_VGW distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>FA12_467_QED</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/FA12_467_QED.png' target='_blank'>
+ <img src='individual_distributions/FA12_467_QED.png' alt='FA12_467_QED distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>FIBA_309_PGS</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/FIBA_309_PGS.png' target='_blank'>
+ <img src='individual_distributions/FIBA_309_PGS.png' alt='FIBA_309_PGS distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_625_QVQ2d</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_625_QVQ2d.png' target='_blank'>
+ <img src='individual_distributions/CFAH_625_QVQ2d.png' alt='CFAH_625_QVQ2d distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>FA9_275_TVV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/FA9_275_TVV.png' target='_blank'>
+ <img src='individual_distributions/FA9_275_TVV.png' alt='FA9_275_TVV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_137_IYT</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_137_IYT.png' target='_blank'>
+ <img src='individual_distributions/CO3_137_IYT.png' alt='CO3_137_IYT distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HEMO_209_DPV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HEMO_209_DPV.png' target='_blank'>
+ <img src='individual_distributions/HEMO_209_DPV.png' alt='HEMO_209_DPV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>FibMS</h3>
+ <div class='source'>Source: AF</div>
+ 
+ <a href='individual_distributions/FibMS.png' target='_blank'>
+ <img src='individual_distributions/FibMS.png' alt='FibMS distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_2429_FDY</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_2429_FDY.png' target='_blank'>
+ <img src='individual_distributions/APOB_2429_FDY.png' alt='APOB_2429_FDY distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_1479_YAY</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_1479_YAY.png' target='_blank'>
+ <img src='individual_distributions/CO3_1479_YAY.png' alt='CO3_1479_YAY distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_1156_ICE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_1156_ICE.png' target='_blank'>
+ <img src='individual_distributions/CO3_1156_ICE.png' alt='CO3_1156_ICE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>THRB_384_SPQ</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/THRB_384_SPQ.png' target='_blank'>
+ <img src='individual_distributions/THRB_384_SPQ.png' alt='THRB_384_SPQ distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>Fibrinogen_6t12</h3>
+ <div class='source'>Source: AF</div>
+ <div class='flags'>High Zeros</div>
+ <a href='individual_distributions/Fibrinogen_6t12.png' target='_blank'>
+ <img src='individual_distributions/Fibrinogen_6t12.png' alt='Fibrinogen_6t12 distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>ALS_235_NVF</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/ALS_235_NVF.png' target='_blank'>
+ <img src='individual_distributions/ALS_235_NVF.png' alt='ALS_235_NVF distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_978_SHP</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_978_SHP.png' target='_blank'>
+ <img src='individual_distributions/CFAH_978_SHP.png' alt='CFAH_978_SHP distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_411_IDV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_411_IDV.png' target='_blank'>
+ <img src='individual_distributions/CFAH_411_IDV.png' alt='CFAH_411_IDV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C4BPA_161_GWS</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C4BPA_161_GWS.png' target='_blank'>
+ <img src='individual_distributions/C4BPA_161_GWS.png' alt='C4BPA_161_GWS distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_342_PYF</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_342_PYF.png' target='_blank'>
+ <img src='individual_distributions/CFAH_342_PYF.png' alt='CFAH_342_PYF distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CBPB2_415_AWH</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CBPB2_415_AWH.png' target='_blank'>
+ <img src='individual_distributions/CBPB2_415_AWH.png' alt='CBPB2_415_AWH distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_2610_TFQ</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_2610_TFQ.png' target='_blank'>
+ <img src='individual_distributions/APOB_2610_TFQ.png' alt='APOB_2610_TFQ distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>Fibrinogen_12t24</h3>
+ <div class='source'>Source: AF</div>
+ <div class='flags'>IQR Outliers</div>
+ <a href='individual_distributions/Fibrinogen_12t24.png' target='_blank'>
+ <img src='individual_distributions/Fibrinogen_12t24.png' alt='Fibrinogen_12t24 distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HPT_79_GDK</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HPT_79_GDK.png' target='_blank'>
+ <img src='individual_distributions/HPT_79_GDK.png' alt='HPT_79_GDK distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HEMO_271_GAT</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HEMO_271_GAT.png' target='_blank'>
+ <img src='individual_distributions/HEMO_271_GAT.png' alt='HEMO_271_GAT distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HEMO_116_WVY</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HEMO_116_WVY.png' target='_blank'>
+ <img src='individual_distributions/HEMO_116_WVY.png' alt='HEMO_116_WVY distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HPT_84_ECE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HPT_84_ECE.png' target='_blank'>
+ <img src='individual_distributions/HPT_84_ECE.png' alt='HPT_84_ECE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_2626_PSV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_2626_PSV.png' target='_blank'>
+ <img src='individual_distributions/APOB_2626_PSV.png' alt='APOB_2626_PSV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_440_TLY</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_440_TLY.png' target='_blank'>
+ <img src='individual_distributions/APOB_440_TLY.png' alt='APOB_440_TLY distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_409_SINd</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_409_SINd.png' target='_blank'>
+ <img src='individual_distributions/CO3_409_SINd.png' alt='CO3_409_SINd distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_68_GEW</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_68_GEW.png' target='_blank'>
+ <img src='individual_distributions/CFAH_68_GEW.png' alt='CFAH_68_GEW distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HPT_58_RTE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HPT_58_RTE.png' target='_blank'>
+ <img src='individual_distributions/HPT_58_RTE.png' alt='HPT_58_RTE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>AMBP_283_VAA</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/AMBP_283_VAA.png' target='_blank'>
+ <img src='individual_distributions/AMBP_283_VAA.png' alt='AMBP_283_VAA distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HGFA_277_CNI</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HGFA_277_CNI.png' target='_blank'>
+ <img src='individual_distributions/HGFA_277_CNI.png' alt='HGFA_277_CNI distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_557_SCV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_557_SCV.png' target='_blank'>
+ <img src='individual_distributions/CO3_557_SCV.png' alt='CO3_557_SCV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>ALS_596_LSE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/ALS_596_LSE.png' target='_blank'>
+ <img src='individual_distributions/ALS_596_LSE.png' alt='ALS_596_LSE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CBPB2_147_HIG</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CBPB2_147_HIG.png' target='_blank'>
+ <img src='individual_distributions/CBPB2_147_HIG.png' alt='CBPB2_147_HIG distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HEMO_333_GYT</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HEMO_333_GYT.png' target='_blank'>
+ <img src='individual_distributions/HEMO_333_GYT.png' alt='HEMO_333_GYT distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HGFA_373_QLS</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HGFA_373_QLS.png' target='_blank'>
+ <img src='individual_distributions/HGFA_373_QLS.png' alt='HGFA_373_QLS distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C4BPB_18_DEH</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C4BPB_18_DEH.png' target='_blank'>
+ <img src='individual_distributions/C4BPB_18_DEH.png' alt='C4BPB_18_DEH distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>HPT_57_LRT</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/HPT_57_LRT.png' target='_blank'>
+ <img src='individual_distributions/HPT_57_LRT.png' alt='HPT_57_LRT distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_1536_CEP</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_1536_CEP.png' target='_blank'>
+ <img src='individual_distributions/CO3_1536_CEP.png' alt='CO3_1536_CEP distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CLUS_168_QTHox</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CLUS_168_QTHox.png' target='_blank'>
+ <img src='individual_distributions/CLUS_168_QTHox.png' alt='CLUS_168_QTHox distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>ALBU_89_LHT</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/ALBU_89_LHT.png' target='_blank'>
+ <img src='individual_distributions/ALBU_89_LHT.png' alt='ALBU_89_LHT distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_625_QVQ</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_625_QVQ.png' target='_blank'>
+ <img src='individual_distributions/CFAH_625_QVQ.png' alt='CFAH_625_QVQ distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_247_DAV</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_247_DAV.png' target='_blank'>
+ <img src='individual_distributions/CFAH_247_DAV.png' alt='CFAH_247_DAV distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CO3_914_AVY</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CO3_914_AVY.png' target='_blank'>
+ <img src='individual_distributions/CO3_914_AVY.png' alt='CO3_914_AVY distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CERU_43_LISd</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CERU_43_LISd.png' target='_blank'>
+ <img src='individual_distributions/CERU_43_LISd.png' alt='CERU_43_LISd distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CBPB2_327_KDH</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CBPB2_327_KDH.png' target='_blank'>
+ <img src='individual_distributions/CBPB2_327_KDH.png' alt='CBPB2_327_KDH distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>APOB_864_EVA</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/APOB_864_EVA.png' target='_blank'>
+ <img src='individual_distributions/APOB_864_EVA.png' alt='APOB_864_EVA distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CFAH_497_GWS</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CFAH_497_GWS.png' target='_blank'>
+ <img src='individual_distributions/CFAH_497_GWS.png' alt='CFAH_497_GWS distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CERU_43_LIS</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CERU_43_LIS.png' target='_blank'>
+ <img src='individual_distributions/CERU_43_LIS.png' alt='CERU_43_LIS distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CBPB2_243_FYA</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CBPB2_243_FYA.png' target='_blank'>
+ <img src='individual_distributions/CBPB2_243_FYA.png' alt='CBPB2_243_FYA distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>C4BPB_17_SDE</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/C4BPB_17_SDE.png' target='_blank'>
+ <img src='individual_distributions/C4BPB_17_SDE.png' alt='C4BPB_17_SDE distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>D-Dimer_12t24</h3>
+ <div class='source'>Source: AF</div>
+ 
+ <a href='individual_distributions/D-Dimer_12t24.png' target='_blank'>
+ <img src='individual_distributions/D-Dimer_12t24.png' alt='D-Dimer_12t24 distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>Fibrinogen_H4t6</h3>
+ <div class='source'>Source: AF</div>
+ <div class='flags'>High Zeros</div>
+ <a href='individual_distributions/Fibrinogen_H4t6.png' target='_blank'>
+ <img src='individual_distributions/Fibrinogen_H4t6.png' alt='Fibrinogen_H4t6 distribution'>
+ </a>
+ </div>
+ <div class='protein-card'>
+ <h3>CHLE_528_LTL</h3>
+ <div class='source'>Source: Fused</div>
+ 
+ <a href='individual_distributions/CHLE_528_LTL.png' target='_blank'>
+ <img src='individual_distributions/CHLE_528_LTL.png' alt='CHLE_528_LTL distribution'>
+ </a>
+ </div>
+ </div>
+</body>
+</html>
